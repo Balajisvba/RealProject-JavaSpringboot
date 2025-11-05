@@ -1,6 +1,7 @@
 package com.RealProject.RealProject.Repository;
 
 import com.RealProject.RealProject.Model.Delivery;
+import com.RealProject.RealProject.projections.MonthReportProjection;
 import com.RealProject.RealProject.projections.ReportProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +16,7 @@ public interface DeliveryRepo extends JpaRepository<Delivery,Integer> {
     @Query(value="SELECT c.name, d.delivery_date, d.num_of_cans FROM customer c LEFT JOIN delivery d ON c.id = d.customer_id WHERE c.name = :name",nativeQuery =true)
     List<ReportProjection>reportByName(String name);
 
-    @Query(value="SELECT c.name,DATE_FORMAT(d.delivery_date, '%Y-%m') AS month,SUM(d.num_of_cans) AS totalCans FROM delivery d LEFT JOIN customer c on customer_id=:id WHERE c.name = :name GROUP BY DATE_FORMAT(d.delivery_date, '%Y-%m') ORDER BY month ASC;")
-    List<ReportProjection>monthReport(String name, Long id);
+    @Query(value="SELECT c.name,DATE_FORMAT(d.delivery_date, '%Y-%m') AS month,SUM(d.num_of_cans) AS totalCans FROM delivery d LEFT JOIN customer c on customer_id=c.id WHERE c.name = :name GROUP BY DATE_FORMAT(d.delivery_date, '%Y-%m') ORDER BY month ASC;", nativeQuery = true)
+    List<MonthReportProjection>excelmonthReport(String name);
 
 }
