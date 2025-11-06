@@ -28,6 +28,7 @@ public class CustomerController {
     public ResponseEntity<Customer> getCustomerById(@RequestParam int id){
         Customer data = customerServices.getCustomerById(id);
         return ResponseEntity.ok(data);
+
     }
     @PostMapping("/cust")
     public Customer getCustomer(@RequestParam int id){
