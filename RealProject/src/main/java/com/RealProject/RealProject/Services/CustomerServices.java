@@ -44,4 +44,8 @@ public class CustomerServices {
         customerRepo.save(customer);
         return "Updated the Customer";
     }
+    public String deleteCustomer(int id){
+        customerRepo.deleteById(id);
+        return "Delevery Deleted Successfully";
+    }
 }

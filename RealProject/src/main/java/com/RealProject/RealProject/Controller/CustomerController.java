@@ -41,12 +41,9 @@ public class CustomerController {
         return ResponseEntity.ok(data);
 
     }
-    @PutMapping("/customer/{id}")
-    public String updateCustomer(@RequestParam int id){
-        return customerServices.updateCustomer(id);
-    }
     @DeleteMapping("/customer/{id}")
-    public String deleteCustomer(@RequestParam int id){
-        return customerServices.deleteCustomer(id);
+    public ResponseEntity<String> deleteCustomer(@RequestParam int id){
+         String data = customerServices.deleteCustomer(id);
+        return ResponseEntity.ok(data);
     }
 }
