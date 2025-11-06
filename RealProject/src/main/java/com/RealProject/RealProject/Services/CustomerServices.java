@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import static org.aspectj.runtime.internal.Conversions.intValue;
 
 @Service
 public class CustomerServices {
@@ -33,12 +34,14 @@ public class CustomerServices {
     public Customer getCustomer(int id){
         return customerRepo.findById(id).orElseThrow();
     }
-    public String updateCustomer(int id){
-        Customer cust=customerRepo.findById(id).orElseThrow(()->new CustomerNotFoundException("Customer Not Found at the id"+id));
-        return "Customer Not Updated Because You Did not send any data";
-    }
-    public String deleteCustomer(int id){
-        customerRepo.deleteById(id);
-        return "Customer Deleted Successfully";
+    public String updateCustomer (Customer cust) {
+        int id = intValue(cust.getId());
+        Customer customer = customerRepo.findById(id).orElseThrow(() -> new CustomerNotFoundException("Customer not Found in the Id" + id));
+        customer.setName(cust.getName());
+        customer.setAddress(cust.getAddress());
+        customer.setEmail(cust.getEmail());
+        customer.setPricePerCan(cust.getPricePerCan());
+        customerRepo.save(customer);
+        return "Updated the Customer";
     }
 }
