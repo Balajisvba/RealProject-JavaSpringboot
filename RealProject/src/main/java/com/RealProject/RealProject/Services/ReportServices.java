@@ -3,6 +3,7 @@ package com.RealProject.RealProject.Services;
 import com.RealProject.RealProject.Repository.CustomerRepo;
 import com.RealProject.RealProject.Repository.DeliveryRepo;
 import com.RealProject.RealProject.Utility.ExcelGenerator;
+import com.RealProject.RealProject.projections.AllCustomerExcel;
 import com.RealProject.RealProject.projections.MonthReportProjection;
 import com.RealProject.RealProject.projections.ReportProjection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,15 @@ public class ReportServices {
         dataes.put("SheetName","Delevery Reports");
         dataes.put("ReportList",reports);
         return ExcelGenerator.generateReport(dataes);
+    }
+    public byte[] excelAllCustomer(int month) throws IOException{
+        List<AllCustomerExcel> reports = reportRepo.allCustomerExcel(month);
+        List<String> headersForAllCustomer = Arrays.asList("Customer Name List","Address","TotalNumbersOFCans","Total Amount");
+        dataes.put("Headers",headersForAllCustomer);
+        dataes.put("SheetName","All Customer Report");
+        dataes.put("ReportList",reports);
+        return ExcelGenerator.generateReport(dataes);
+
     }
 
 
