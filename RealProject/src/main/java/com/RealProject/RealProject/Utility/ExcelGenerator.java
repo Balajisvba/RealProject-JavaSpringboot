@@ -1,5 +1,6 @@
 package com.RealProject.RealProject.Utility;
 
+import com.RealProject.RealProject.projections.AllCustomerExcel;
 import com.RealProject.RealProject.projections.MonthReportProjection;
 import com.RealProject.RealProject.projections.ReportProjection;
 import org.apache.poi.ss.usermodel.Cell;
@@ -37,6 +38,13 @@ public class ExcelGenerator {
                 row.createCell(0).setCellValue(mr.getName());
                 row.createCell(1).setCellValue(mr.getMonth());
                 row.createCell(2).setCellValue(mr.getTotalCans());
+            }
+            else if(report instanceof AllCustomerExcel ce){
+                Row row=sheet.createRow(rowIndex++);
+                row.createCell(0).setCellValue(ce.getName());
+                row.createCell(1).setCellValue(ce.getAddress());
+                row.createCell(2).setCellValue(ce.getTotalCans());
+                row.createCell(3).setCellValue(ce.getAmount());
             }
         }
         //AutoSize Columns
