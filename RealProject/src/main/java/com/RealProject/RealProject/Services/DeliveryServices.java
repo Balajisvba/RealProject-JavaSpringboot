@@ -1,6 +1,8 @@
 package com.RealProject.RealProject.Services;
 
 
+import com.RealProject.RealProject.Exception.CustomerNotFoundException;
+import com.RealProject.RealProject.Exception.DeleveryNotFoundException;
 import com.RealProject.RealProject.Model.Delivery;
 import com.RealProject.RealProject.Repository.DeliveryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +37,9 @@ public class DeliveryServices {
         return "Updated Successfully for Delivery";
     }
 
+   
+    public String deleteDelivery(int id){
+        deliveryRepo.deleteById(id);
+        return "Delevery Deleted Successfully";
+    }
 }

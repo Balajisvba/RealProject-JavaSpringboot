@@ -28,6 +28,7 @@ public class CustomerController {
     public ResponseEntity<Customer> getCustomerById(@RequestParam int id){
         Customer data = customerServices.getCustomerById(id);
         return ResponseEntity.ok(data);
+
     }
     @PostMapping("/cust")
     public ResponseEntity<Customer> getCustomer(@RequestParam int id){
@@ -39,5 +40,13 @@ public class CustomerController {
         String data=customerServices.updateCustomer(customer);
         return ResponseEntity.ok(data);
 
+    }
+    @PutMapping("/customer/{id}")
+    public String updateCustomer(@RequestParam int id){
+        return customerServices.updateCustomer(id);
+    }
+    @DeleteMapping("/customer/{id}")
+    public String deleteCustomer(@RequestParam int id){
+        return customerServices.deleteCustomer(id);
     }
 }

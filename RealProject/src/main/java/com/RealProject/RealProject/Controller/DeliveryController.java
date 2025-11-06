@@ -27,5 +27,9 @@ public class DeliveryController {
     public ResponseEntity<String> updateDelivery(@RequestBody Delivery delivery){
         String data= deliveryServices.updateDelivery(delivery);
         return ResponseEntity.ok(data);
+   
+    @DeleteMapping("/delivery/{id}")
+    public String deleteDelivery(@RequestParam int id){
+        return deliveryServices.deleteDelivery(id);
     }
 }
