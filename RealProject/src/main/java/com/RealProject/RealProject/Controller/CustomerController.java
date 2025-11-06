@@ -34,4 +34,12 @@ public class CustomerController {
     public Customer getCustomer(@RequestParam int id){
         return customerServices.getCustomer(id);
     }
+    @PutMapping("/customer/{id}")
+    public String updateCustomer(@RequestParam int id){
+        return customerServices.updateCustomer(id);
+    }
+    @DeleteMapping("/customer/{id}")
+    public String deleteCustomer(@RequestParam int id){
+        return customerServices.deleteCustomer(id);
+    }
 }

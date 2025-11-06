@@ -31,5 +31,14 @@ public class CustomerServices {
          return customerByID;
     }
     public Customer getCustomer(int id){
-        return customerRepo.findById(id).orElseThrow();}
+        return customerRepo.findById(id).orElseThrow();
+    }
+    public String updateCustomer(int id){
+        Customer cust=customerRepo.findById(id).orElseThrow(()->new CustomerNotFoundException("Customer Not Found at the id"+id));
+        return "Customer Not Updated Because You Did not send any data";
+    }
+    public String deleteCustomer(int id){
+        customerRepo.deleteById(id);
+        return "Customer Deleted Successfully";
+    }
 }
