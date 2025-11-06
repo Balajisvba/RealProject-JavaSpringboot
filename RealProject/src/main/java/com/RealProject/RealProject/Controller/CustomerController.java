@@ -30,7 +30,14 @@ public class CustomerController {
         return ResponseEntity.ok(data);
     }
     @PostMapping("/cust")
-    public Customer getCustomer(@RequestParam int id){
-        return customerServices.getCustomer(id);
+    public ResponseEntity<Customer> getCustomer(@RequestParam int id){
+        Customer data= customerServices.getCustomer(id);
+        return ResponseEntity.ok(data);
+    }
+    @PutMapping("/customer")
+    public ResponseEntity<String> updateCustomer(@RequestBody Customer customer){
+        String data=customerServices.updateCustomer(customer);
+        return ResponseEntity.ok(data);
+
     }
 }
