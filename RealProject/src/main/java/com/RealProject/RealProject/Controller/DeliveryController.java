@@ -23,4 +23,12 @@ public class DeliveryController {
         List<Delivery> data= deliveryServices.getAllDeliveries();
         return ResponseEntity.ok(data);
     }
+    @PutMapping("/delivery/{id}")
+    public String updateDelivery(@RequestParam int id){
+        return deliveryServices.updateDelivery(id);
+    }
+    @DeleteMapping("/delivery/{id}")
+    public String deleteDelivery(@RequestParam int id){
+        return deliveryServices.deleteDelivery(id);
+    }
 }
