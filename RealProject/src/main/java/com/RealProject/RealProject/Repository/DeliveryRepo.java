@@ -23,4 +23,8 @@ public interface DeliveryRepo extends JpaRepository<Delivery,Integer> {
     @Query(value="SELECT c.id,c.name,c.address,COALESCE(SUM(d.num_of_cans), 0)  AS total_cans,(COALESCE(SUM(d.num_of_cans), 0)  * c.price_per_can) As Amount\n" +
             "FROM customer c LEFT JOIN delivery d ON c.id = d.customer_id AND MONTH(d.delivery_date) =:month GROUP BY c.id, c.name, c.address ORDER BY c.name;",nativeQuery = true)
     List<AllCustomerExcel>allCustomerExcel(int month);
+
+
+    @Query(value="SELECT COALESCE(SUM(d.num_of_cans), 0) AS total_cans FROM delivery d WHERE d.customer_id =:customerId  AND MONTH(d.delivery_date) =:billMonth ;",nativeQuery = true)
+    int totCans(int billMonth,int customerId);
 }
